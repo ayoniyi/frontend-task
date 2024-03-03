@@ -14,18 +14,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
-  SelectGroup,
+  //SelectGroup,
   SelectItem,
-  SelectLabel,
+  //SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 
 import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
 
 const formSchema = z.object({
   companyName: z.string().min(3).max(100),
@@ -41,6 +41,7 @@ const formSchema = z.object({
 
 const FormContainer = () => {
   const { toast } = useToast();
+  const [employeeCount, setEmployeeCount] = useState("1-10");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -68,9 +69,9 @@ const FormContainer = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="formTop flex flex-row justify-between my-10">
+        <div className="formTop flex flex-col-reverse sm:flex-row justify-between my-10">
           <Upload />
-          <div className="btns">
+          <div className="btns ">
             <Button type="button" variant="outline">
               Cancel
             </Button>
@@ -79,7 +80,7 @@ const FormContainer = () => {
         </div>
         <div className="formBx">
           <div className="formRow">
-            <div className="inputBx w-[48%]">
+            <div className="inputBx w-[100%] sm:w-[48%]">
               <FormField
                 control={form.control}
                 name="companyName"
@@ -97,7 +98,7 @@ const FormContainer = () => {
                 )}
               />
             </div>
-            <div className="inputBx w-[48%]">
+            <div className="inputBx w-[100%] sm:w-[48%]">
               <FormField
                 control={form.control}
                 name="companySite"
@@ -120,7 +121,7 @@ const FormContainer = () => {
           </div>
 
           <div className="formRow">
-            <div className="inputBx w-[48%]">
+            <div className="inputBx w-[100%] sm:w-[48%] ">
               <FormField
                 control={form.control}
                 name="companyLinkedIn"
@@ -138,7 +139,7 @@ const FormContainer = () => {
                 )}
               />
             </div>
-            <div className="inputBx w-[48%]">
+            <div className="inputBx w-[100%] sm:w-[48%]">
               <FormField
                 control={form.control}
                 name="companyIndustry"
@@ -161,13 +162,45 @@ const FormContainer = () => {
           </div>
 
           <div className="mt-8 w-[50%]">
-            <p className=" mb-3 text-sm">Employee Count</p>
-            {/* <div className="mt-3">
-              <Badge>1-10</Badge>
-              <Badge>10-100</Badge>
-              <Badge>100-500</Badge>
-              <Badge>1000+</Badge>
-            </div> */}
+            <p className=" mb-5 text-sm">Employee Count</p>
+            <div className="mt-3 flex flex-row">
+              <div
+                className={
+                  employeeCount === "1-10" ? "badge badgeActive" : "badge"
+                }
+                onClick={() => setEmployeeCount("1-10")}
+              >
+                <p className="text-sm">1 - 10</p>
+              </div>
+              <div
+                className={
+                  employeeCount === "1-100"
+                    ? "badge mx-3 badgeActive"
+                    : "badge mx-3"
+                }
+                onClick={() => setEmployeeCount("1-100")}
+              >
+                <p className="text-sm">10 - 100</p>
+              </div>
+              <div
+                className={
+                  employeeCount === "100-500" ? "badge badgeActive" : "badge"
+                }
+                onClick={() => setEmployeeCount("100-500")}
+              >
+                <p className="text-sm">100 - 500</p>
+              </div>
+              <div
+                className={
+                  employeeCount === "1000+"
+                    ? "badge mx-3 badgeActive"
+                    : "badge mx-3"
+                }
+                onClick={() => setEmployeeCount("1000+")}
+              >
+                <p className="text-sm">1000+</p>
+              </div>
+            </div>
           </div>
           <div className="inputBx w-[100%] mt-10">
             <FormField
@@ -246,7 +279,7 @@ const FormContainer = () => {
             </div>
 
             <div className="formRow">
-              <div className="inputBx w-[48%] mt-10">
+              <div className="inputBx w-[100%] sm:w-[48%] mt-2 sm:mt-10">
                 <FormField
                   control={form.control}
                   name="fundingRound"
@@ -276,7 +309,7 @@ const FormContainer = () => {
                   )}
                 />
               </div>
-              <div className="inputBx w-[48%] mt-10">
+              <div className="inputBx w-[100%] sm:w-[48%] mt-2 sm:mt-10">
                 <FormField
                   control={form.control}
                   name="faqs"

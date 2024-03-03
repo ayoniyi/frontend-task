@@ -37,7 +37,6 @@ const Upload = () => {
 
   const onDrop = useCallback((acceptedFiles: any) => {
     // const acceptedFiles: FileList = event.dataTransfer?.files;
-    console.log("???", acceptedFiles);
     const file = acceptedFiles && acceptedFiles[0];
     if (file) {
       const fileSizeInBytes = file.size;
@@ -59,36 +58,34 @@ const Upload = () => {
         setSelectedFile(file);
       }
     }
-
-    // Do something with the files
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <div>
-      <div
-        {...getRootProps({
-          className: "",
-        })}
-      >
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Drop the files here ...</p>
-        ) : (
-          <p>Drag 'n' drop some files here, or click to select files</p>
-        )}
-      </div>
-      <div className="flex flex-row items-center ">
+      <div className="flex flex-row items-center relative mt-6 sm:mt-0">
+        <div
+          {...getRootProps({
+            className: "uploadBox",
+          })}
+        >
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p>Drop the files here ...</p>
+          ) : (
+            <p>Drag 'n' drop some files here, or click to select files</p>
+          )}
+        </div>
         <Image
-          className="uploadImg "
+          className="uploadImg"
           src={selectedFile ? URL.createObjectURL(selectedFile) : uploadIcon}
           alt="upload"
           width={"108"}
           height={"108"}
         />
 
-        <div className="mx-8 mt-8 ">
+        <div className="mx-2 sm:mx-8 mt-8 w-[70%] sm:w-[100%] ">
           <div className="btns">
             <Button
               type="button"

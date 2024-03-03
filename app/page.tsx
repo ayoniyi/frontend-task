@@ -7,13 +7,20 @@ export default function Home() {
     <main>
       <div className="content">
         <h2 className="text-4xl font-semibold">Settings</h2>
-        <Tabs defaultValue="Your Profile" className="w-[50%] mt-8">
-          <TabsList className="grid w-full grid-cols-5 text-sm">
+        <Tabs
+          defaultValue="Your Profile"
+          className=" sm:w-[100%] md:w-[80%] lg:w-[50%] mt-4 sm:mt-8"
+        >
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 text-sm">
             <TabsTrigger value="Your Profile">Your Profile</TabsTrigger>
             <TabsTrigger value="Company Info">Company Info</TabsTrigger>
             <TabsTrigger value="Manage Seats">Manage Seats</TabsTrigger>
-            <TabsTrigger value="Do not Contact">Do not Contact</TabsTrigger>
-            <TabsTrigger value="Integrations">Integrations</TabsTrigger>
+            <TabsTrigger className="hidden md:block" value="Do not Contact">
+              Do not Contact
+            </TabsTrigger>
+            <TabsTrigger className="hidden md:block" value="Integrations">
+              Integrations
+            </TabsTrigger>
           </TabsList>
           {/* <TabsContent value="account"></TabsContent> */}
           {/* <TabsContent value="account"></TabsContent> */}
