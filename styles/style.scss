@@ -13,6 +13,12 @@
     margin-left: 1rem;
   }
 }
+.uploadImg {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
 .formRow {
   @include flexRegular(row, space-between);
@@ -28,7 +34,7 @@
 }
 
 @media (max-width: 450px) {
-  .formTop {
-  }
+  // .formTop {
+  // }
 }
 // text-[#17171F]/[.5]

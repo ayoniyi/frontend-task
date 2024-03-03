@@ -2,8 +2,9 @@ import Image from "next/image";
 import uploadIcon from "@/assets/uploadIcon.svg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { DragEventHandler, useCallback, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { useDropzone } from "react-dropzone";
 
 const Upload = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -33,20 +34,67 @@ const Upload = () => {
       }
     }
   };
+
+  const onDrop = useCallback((acceptedFiles: any) => {
+    // const acceptedFiles: FileList = event.dataTransfer?.files;
+    console.log("???", acceptedFiles);
+    const file = acceptedFiles && acceptedFiles[0];
+    if (file) {
+      const fileSizeInBytes = file.size;
+      const fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
+
+      if (fileSizeInMegabytes > 16) {
+        toast({
+          variant: "destructive",
+          description: "File size exceeds 16MB limit.",
+        });
+      } else if (
+        !["image/jpeg", "image/png", "image/svg"].includes(file.type)
+      ) {
+        toast({
+          variant: "destructive",
+          description: "Only SVG, PNG, and JPG images are allowed.",
+        });
+      } else {
+        setSelectedFile(file);
+      }
+    }
+
+    // Do something with the files
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
   return (
     <div>
+      <div
+        {...getRootProps({
+          className: "",
+        })}
+      >
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p>Drop the files here ...</p>
+        ) : (
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        )}
+      </div>
       <div className="flex flex-row items-center ">
-        <div className="rounded-full border-8 mt-8">
-          <Image
-            src={selectedFile ? URL.createObjectURL(selectedFile) : uploadIcon}
-            alt="upload"
-            width={"20"}
-          />
-        </div>
+        <Image
+          className="uploadImg "
+          src={selectedFile ? URL.createObjectURL(selectedFile) : uploadIcon}
+          alt="upload"
+          width={"108"}
+          height={"108"}
+        />
 
         <div className="mx-8 mt-8 ">
           <div className="btns">
-            <Button type="button" variant="destructive">
+            <Button
+              type="button"
+              variant="destructive"
+              onClick={() => setSelectedFile(null)}
+            >
               Remove
             </Button>
             <Button type="button" variant="outline" className="relative">
