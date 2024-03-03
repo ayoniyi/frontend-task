@@ -9,7 +9,7 @@ export default function Home() {
         <h2 className="text-4xl font-semibold">Settings</h2>
         <Tabs
           defaultValue="Your Profile"
-          className=" sm:w-[100%] md:w-[80%] lg:w-[50%] mt-4 sm:mt-8"
+          className=" sm:w-[100%] md:w-[80%] lg:w-[50%] mt-8"
         >
           <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 text-sm">
             <TabsTrigger value="Your Profile">Your Profile</TabsTrigger>
