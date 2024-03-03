@@ -1,0 +1,34 @@
+@import "./mixin";
+.content {
+  //border: 1px solid #000;
+  width: 85%;
+  margin: 4em auto 2em auto;
+  padding-top: 3rem;
+}
+
+.btns {
+  margin-bottom: 0.7rem;
+  position: relative;
+  :nth-child(2) {
+    margin-left: 1rem;
+  }
+}
+
+.formRow {
+  @include flexRegular(row, space-between);
+  margin-bottom: 1.5rem;
+}
+.hide {
+  //pointer-events: none;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  // visibility: hidden;
+  opacity: 0;
+}
+
+@media (max-width: 450px) {
+  .formTop {
+  }
+}
+// text-[#17171F]/[.5]

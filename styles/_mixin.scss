@@ -1,0 +1,11 @@
+@mixin flexRegular($direction, $space) {
+  display: flex;
+  justify-content: $space;
+  align-items: center;
+  flex-direction: $direction;
+  //transition: 0.3s ease-in;
+}
+@mixin gridRegular($gap) {
+  display: grid;
+  gap: $gap;
+}
